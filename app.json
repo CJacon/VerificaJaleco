@@ -1,1 +1,23 @@
-{"expo":{"name":"VerificaJalecos","slug":"verificajalecos","version":"1.0.0","orientation":"portrait","newArchEnabled":true}}
+{
+  "expo": {
+    "name": "VerificaJalecos",
+    "slug": "verificajalecos",
+    "owner": "verificajaleco",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "newArchEnabled": true,
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "e7feba98-8133-411d-ab7b-cfa1cd1a252c"
+      }
+    },
+    "updates": {
+      "url": "https://u.expo.dev/e7feba98-8133-411d-ab7b-cfa1cd1a252c"
+    },
+    "android": {},
+    "ios": {}
+  }
+}
