@@ -1,6 +1,9 @@
+import { useRouter } from 'expo-router';
 import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 export default function PerfilScreen() {
+  const router = useRouter();
+
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.pageTitle}>Meu perfil</Text>
@@ -18,7 +21,7 @@ export default function PerfilScreen() {
         <Text style={styles.inputLabel}>Ocupação</Text>
         <TextInput style={styles.input} placeholder="Ocupação" placeholderTextColor="#888" />
       </View>
-      <TouchableOpacity style={styles.logoutButton}>
+      <TouchableOpacity style={styles.logoutButton} onPress={() => router.replace('/login')}>
         <Text style={styles.logoutText}>SAIR</Text>
       </TouchableOpacity>
     </ScrollView>

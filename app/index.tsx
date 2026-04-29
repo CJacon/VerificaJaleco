@@ -1,10 +1,17 @@
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 export default function DashboardScreen() {
+  const dataHoje = new Date().toLocaleDateString('pt-BR', {
+    weekday: 'long',
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+  });
+
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.pageTitle}>Dashboard</Text>
-      <Text style={styles.pageSubtitle}>Quarta-feira, 08 de abril de 2026</Text>
+      <Text style={styles.pageSubtitle}>{dataHoje}</Text>
 
       <View style={styles.cardRow}>
         <View style={[styles.card, styles.cardBlue]}>
