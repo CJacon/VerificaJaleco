@@ -46,4 +46,4 @@ const styles = StyleSheet.create({
   tableHeaderText: { fontWeight: 'bold', color: '#aaa' },
   tableRow: { flexDirection: 'row', paddingVertical: 6, borderBottomWidth: 0.5, borderBottomColor: '#444' },
   tableCell: { flex: 1, color: '#fff', fontSize: 13 },
-});
+}); 
