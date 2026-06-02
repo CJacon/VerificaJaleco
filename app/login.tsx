@@ -1,8 +1,34 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { useState } from 'react';
+import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 export default function LoginScreen() {
   const router = useRouter();
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+
+  const handleLogin = async () => {
+    if (!email || !senha) {
+      Alert.alert('Erro', 'Preencha todos os campos!');
+      return;
+    }
+
+    const dados = await AsyncStorage.getItem('usuarios');
+    const usuarios = dados ? JSON.parse(dados) : [];
+
+    const usuario = usuarios.find(
+      (u: any) => u.email === email && u.senha === senha
+    );
+
+    if (!usuario) {
+      Alert.alert('Erro', 'Email ou senha incorretos!');
+      return;
+    }
+
+    await AsyncStorage.setItem('usuarioLogado', JSON.stringify(usuario));
+    router.replace('/');
+  };
 
   return (
     <View style={styles.container}>
@@ -20,24 +46,24 @@ export default function LoginScreen() {
           placeholderTextColor="#888"
           keyboardType="email-address"
           autoCapitalize="none"
+          value={email}
+          onChangeText={setEmail}
         />
         <TextInput
           style={styles.input}
           placeholder="Senha"
           placeholderTextColor="#888"
           secureTextEntry
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Perfil do usuário"
-          placeholderTextColor="#888"
+          value={senha}
+          onChangeText={setSenha}
         />
 
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => router.replace('/')}
-        >
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
           <Text style={styles.buttonText}>ENTRAR</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.buttonSecondary} onPress={() => router.push('/cadastro')}>
+          <Text style={styles.buttonSecondaryText}>Criar conta</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -54,4 +80,6 @@ const styles = StyleSheet.create({
   input: { backgroundColor: '#2a5080', borderRadius: 8, padding: 14, color: '#fff', fontSize: 14 },
   button: { backgroundColor: '#4a90d9', borderRadius: 8, padding: 16, alignItems: 'center', marginTop: 8 },
   buttonText: { color: '#fff', fontWeight: 'bold', fontSize: 15 },
+  buttonSecondary: { borderWidth: 1, borderColor: '#4a90d9', borderRadius: 8, padding: 16, alignItems: 'center' },
+  buttonSecondaryText: { color: '#4a90d9', fontWeight: 'bold', fontSize: 15 },
 });
