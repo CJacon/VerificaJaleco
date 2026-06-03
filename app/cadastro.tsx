@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useRouter } from 'expo-router';
-import { useState } from 'react';
+import { useFocusEffect, useRouter } from 'expo-router';
+import { useCallback, useState } from 'react';
 import { Alert, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 export default function CadastroScreen() {
@@ -10,6 +10,16 @@ export default function CadastroScreen() {
   const [senha, setSenha] = useState('');
   const [confirmarSenha, setConfirmarSenha] = useState('');
   const [ocupacao, setOcupacao] = useState('');
+
+  useFocusEffect(
+    useCallback(() => {
+      setNome('');
+      setEmail('');
+      setSenha('');
+      setConfirmarSenha('');
+      setOcupacao('');
+    }, [])
+  );
 
   const handleCadastro = async () => {
     if (!nome || !email || !senha || !confirmarSenha || !ocupacao) {
